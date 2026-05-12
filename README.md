@@ -31,7 +31,7 @@ src/
 | `/` | Italian homepage |
 | `/blog/` | Blog listing |
 | `/blog/agentic-workflow-2026/` | Article: Agentic Workflow nel 2026 |
-| `/blog/ai-fsi-compliance/` | Article: AI e Compliance nel Settore Finanziario |
+| `/blog/agentic-ai-enterprise-systems/` | Article: Sistemi AI Agentici: Architetture sicure per istituti finanziari e grandi imprese |
 | `/blog/multi-agent-systems/` | Article: Sistemi Multi-Agent in Produzione |
 | `/en/` | English landing page |
 
