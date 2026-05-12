@@ -1,6 +1,6 @@
 # lucaflammia.it — Personal Website
 
-Professional Italian-first personal website for Luca Flammia, PhD — AI Solutions Architect & Engineer. Built to generate B2B consulting leads in the Italian FSI/Enterprise market.
+Professional Italian-first personal website for Luca Flammia, PhD — AI Solutions Architect & Data Scientist. Built to generate B2B consulting leads in the Italian FSI/Enterprise market.
 
 ## Stack
 
