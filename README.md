@@ -1,46 +1,50 @@
-# Astro Starter Kit: Basics
+# lucaflammia.it — Personal Website
 
-```sh
-npm create astro@latest -- --template basics
+Professional Italian-first personal website for Luca Flammia, PhD — AI Solutions Architect & Engineer. Built to generate B2B consulting leads in the Italian FSI/Enterprise market.
+
+## Stack
+
+- **Framework:** [Astro](https://astro.build) (static site generation)
+- **Deployment:** Vercel Hobby Tier
+- **Domain:** lucaflammia.it
+
+## Structure
+
+```
+src/
+├── content/           # Blog articles (Astro Content Collections)
+├── layouts/
+│   └── Layout.astro   # Base layout with SEO metadata
+├── pages/
+│   ├── index.astro    # Italian homepage (hero, career arc, skills, blog, CTA)
+│   ├── blog/          # Blog listing + individual article pages
+│   └── en/
+│       └── index.astro  # English mirror page
+└── styles/
+    └── global.css     # Design system (dark typographic)
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Routes
 
-## 🚀 Project Structure
+| Route | Description |
+|---|---|
+| `/` | Italian homepage |
+| `/blog/` | Blog listing |
+| `/blog/agentic-workflow-2026/` | Article: Agentic Workflow nel 2026 |
+| `/blog/ai-fsi-compliance/` | Article: AI e Compliance nel Settore Finanziario |
+| `/blog/multi-agent-systems/` | Article: Sistemi Multi-Agent in Produzione |
+| `/en/` | English landing page |
 
-Inside of your Astro project, you'll see the following folders and files:
+## Commands
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+| Command | Action |
+|---|---|
+| `npm install` | Install dependencies |
+| `npm run dev` | Start dev server at `localhost:4321` |
+| `npm run build` | Build to `./dist/` |
+| `npm run preview` | Preview production build locally |
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Pre-launch checklist
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- [ ] Replace `href="#booking"` in `src/pages/index.astro` and `src/pages/en/index.astro` with real Calendly/TidyCal URL
+- [ ] Connect repo to Vercel and set custom domain `lucaflammia.it`

@@ -1,0 +1,202 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString('it-IT', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+---
+
+<Layout
+  title={`${post.data.title} — Luca Flammia, PhD`}
+  description={post.data.description}
+  lang="it"
+>
+  <nav class="fixed top-0 left-0 right-0 z-50 border-b border-[#222222] bg-[#0a0a0a]/90 backdrop-blur-sm">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="/" class="text-sm font-medium tracking-widest uppercase text-[#c9a84c] hover:text-[#a07c30] transition-colors">LF</a>
+      <div class="flex items-center gap-8 text-sm text-[#8a8480]">
+        <a href="/#percorso" class="hover:text-[#f5f0eb] transition-colors">Percorso</a>
+        <a href="/blog" class="hover:text-[#f5f0eb] transition-colors">Articoli</a>
+        <a href="/en" class="hover:text-[#f5f0eb] transition-colors text-xs tracking-widest uppercase">EN</a>
+        <a href="/#booking" class="px-4 py-2 border border-[#c9a84c] text-[#c9a84c] text-xs tracking-widest uppercase hover:bg-[#c9a84c] hover:text-[#0a0a0a] transition-all duration-200">
+          Discovery Call
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="pt-32 pb-24 px-6">
+    <div class="max-w-2xl mx-auto">
+      <!-- Back link -->
+      <a href="/blog" class="inline-flex items-center gap-2 text-xs text-[#8a8480] hover:text-[#f5f0eb] transition-colors mb-12 tracking-widest uppercase">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M13 8H3M7 12l-4-4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Articoli
+      </a>
+
+      <!-- Header -->
+      <header class="mb-12">
+        <div class="flex items-center gap-4 mb-5">
+          <span class="text-xs text-[#c9a84c] tracking-widest uppercase">{post.data.category}</span>
+          <span class="text-xs text-[#444444]">{formatDate(post.data.pubDate)}</span>
+          {post.data.readingTime && (
+            <span class="text-xs text-[#444444]">{post.data.readingTime} di lettura</span>
+          )}
+        </div>
+        <h1 class="text-3xl md:text-4xl font-light text-[#f5f0eb] leading-tight mb-4">
+          {post.data.title}
+        </h1>
+        <p class="text-[#8a8480] text-lg font-light leading-relaxed">
+          {post.data.description}
+        </p>
+      </header>
+
+      <div class="border-t border-[#111111] pt-10 mb-10"></div>
+
+      <!-- Article content -->
+      <article class="prose-article">
+        <Content />
+      </article>
+
+      <div class="border-t border-[#111111] mt-16 pt-12">
+        <p class="text-sm text-[#8a8480] mb-6">Scritto da</p>
+        <div class="flex items-center gap-4">
+          <div>
+            <p class="text-[#f5f0eb] font-medium">Luca Flammia, PhD</p>
+            <p class="text-xs text-[#8a8480]">AI Solutions Architect & Engineer · Consulente Senior Indipendente</p>
+          </div>
+        </div>
+
+        <div class="mt-10">
+          <a
+            href="/#booking"
+            class="inline-flex items-center gap-3 px-8 py-4 bg-[#c9a84c] text-[#0a0a0a] text-sm font-medium tracking-widest uppercase hover:bg-[#a07c30] transition-colors duration-200"
+          >
+            Prenota una Discovery Call (30 min)
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="py-8 px-6 border-t border-[#111111]">
+    <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#444444]">
+      <span>© 2026 Luca Flammia. P.IVA disponibile su richiesta.</span>
+      <div class="flex items-center gap-6">
+        <a href="/" class="hover:text-[#8a8480] transition-colors">Home</a>
+        <a href="/blog" class="hover:text-[#8a8480] transition-colors">Articoli</a>
+        <a href="/#booking" class="hover:text-[#8a8480] transition-colors">Discovery Call</a>
+      </div>
+    </div>
+  </footer>
+</Layout>
+
+<style is:global>
+  .prose-article {
+    color: #8a8480;
+    font-size: 0.9375rem;
+    line-height: 1.8;
+  }
+  .prose-article h2 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #f5f0eb;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  .prose-article h3 {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #c9a84c;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .prose-article p {
+    margin-bottom: 1.25rem;
+  }
+  .prose-article strong {
+    color: #f5f0eb;
+    font-weight: 500;
+  }
+  .prose-article em {
+    color: #f5f0eb;
+    font-style: italic;
+  }
+  .prose-article ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.25rem;
+  }
+  .prose-article ul li {
+    padding-left: 1.25rem;
+    position: relative;
+    margin-bottom: 0.5rem;
+  }
+  .prose-article ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #c9a84c;
+  }
+  .prose-article ol {
+    counter-reset: list;
+    padding: 0;
+    margin-bottom: 1.25rem;
+  }
+  .prose-article ol li {
+    counter-increment: list;
+    padding-left: 1.75rem;
+    position: relative;
+    margin-bottom: 0.5rem;
+  }
+  .prose-article ol li::before {
+    content: counter(list) '.';
+    position: absolute;
+    left: 0;
+    color: #c9a84c;
+    font-variant-numeric: tabular-nums;
+  }
+  .prose-article blockquote {
+    border-left: 2px solid #c9a84c;
+    padding-left: 1.25rem;
+    color: #8a8480;
+    font-style: italic;
+    margin: 1.5rem 0;
+  }
+  .prose-article a {
+    color: #c9a84c;
+    text-decoration: none;
+  }
+  .prose-article a:hover {
+    text-decoration: underline;
+  }
+  .prose-article hr {
+    border: none;
+    border-top: 1px solid #222222;
+    margin: 2.5rem 0;
+  }
+  .prose-article code {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 0.8125rem;
+    background: #111111;
+    color: #c9a84c;
+    padding: 0.125rem 0.375rem;
+    border: 1px solid #222222;
+  }
+</style>

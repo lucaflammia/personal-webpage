@@ -1,0 +1,87 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString('it-IT', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+---
+
+<Layout
+  title="Articoli — Luca Flammia, PhD"
+  description="Approfondimenti tecnici su AI agentica, compliance FSI, architetture multi-agente e automazione intelligente per il settore enterprise."
+  lang="it"
+>
+  <nav class="fixed top-0 left-0 right-0 z-50 border-b border-[#222222] bg-[#0a0a0a]/90 backdrop-blur-sm">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="/" class="text-sm font-medium tracking-widest uppercase text-[#c9a84c] hover:text-[#a07c30] transition-colors">LF</a>
+      <div class="flex items-center gap-8 text-sm text-[#8a8480]">
+        <a href="/#percorso" class="hover:text-[#f5f0eb] transition-colors">Percorso</a>
+        <a href="/blog" class="text-[#f5f0eb]">Articoli</a>
+        <a href="/en" class="hover:text-[#f5f0eb] transition-colors text-xs tracking-widest uppercase">EN</a>
+        <a href="/#booking" class="px-4 py-2 border border-[#c9a84c] text-[#c9a84c] text-xs tracking-widest uppercase hover:bg-[#c9a84c] hover:text-[#0a0a0a] transition-all duration-200">
+          Discovery Call
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="pt-32 pb-24 px-6">
+    <div class="max-w-5xl mx-auto">
+      <div class="mb-16">
+        <span class="text-xs tracking-[0.3em] uppercase text-[#c9a84c] font-medium">Articoli</span>
+        <h1 class="text-4xl md:text-5xl font-light mt-3 text-[#f5f0eb]">
+          Approfondimenti tecnici
+        </h1>
+        <p class="text-[#8a8480] mt-4 max-w-xl">
+          AI agentica, compliance FSI, architetture multi-agente — per decisori e team tecnici enterprise.
+        </p>
+      </div>
+
+      <div class="space-y-px bg-[#111111]">
+        {posts.map((post) => (
+          <a
+            href={`/blog/${post.id}`}
+            class="block bg-[#0a0a0a] p-8 hover:bg-[#0d0d0d] transition-colors group"
+          >
+            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+              <div class="flex-1">
+                <div class="flex items-center gap-4 mb-3">
+                  <span class="text-xs text-[#c9a84c] tracking-widest uppercase">{post.data.category}</span>
+                  {post.data.readingTime && (
+                    <span class="text-xs text-[#444444]">{post.data.readingTime} di lettura</span>
+                  )}
+                </div>
+                <h2 class="text-xl font-medium text-[#f5f0eb] mb-3 group-hover:text-[#c9a84c] transition-colors leading-snug">
+                  {post.data.title}
+                </h2>
+                <p class="text-sm text-[#8a8480] leading-relaxed max-w-2xl">
+                  {post.data.description}
+                </p>
+              </div>
+              <div class="flex md:flex-col items-start md:items-end gap-4 md:gap-2 shrink-0">
+                <span class="text-xs text-[#444444] whitespace-nowrap">{formatDate(post.data.pubDate)}</span>
+                <span class="text-[#c9a84c] text-sm group-hover:translate-x-1 transition-transform">→</span>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </main>
+
+  <footer class="py-8 px-6 border-t border-[#111111]">
+    <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#444444]">
+      <span>© 2026 Luca Flammia. P.IVA disponibile su richiesta.</span>
+      <div class="flex items-center gap-6">
+        <a href="/" class="hover:text-[#8a8480] transition-colors">Home</a>
+        <a href="/en" class="hover:text-[#8a8480] transition-colors tracking-widest uppercase">English</a>
+        <a href="/#booking" class="hover:text-[#8a8480] transition-colors">Discovery Call</a>
+      </div>
+    </div>
+  </footer>
+</Layout>
