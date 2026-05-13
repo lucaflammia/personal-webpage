@@ -2,7 +2,7 @@
 title: "Dall'automazione alla collaborazione: l'era dei Multi-Agent Systems"
 description: "Un singolo agente AI è potente. Un sistema di agenti coordinati è trasformativo. Principi di progettazione per architetture multi-agente robuste in produzione."
 pubDate: 2026-03-20
-category: "Architettura"
+category: "Architettura Agentica"
 readingTime: "9 min"
 ---
 
