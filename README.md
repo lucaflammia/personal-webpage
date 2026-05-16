@@ -1,4 +1,4 @@
-# lucaflammia.it — Personal Website
+# lucaflammia.com — Personal Website
 
 Official website of Luca Flammia, PhD — AI Solutions Architect. Expert in agentic systems and data science for Enterprise and regulated industries. Strategic B2B consultancy for the Italian and international markets."
 
@@ -6,7 +6,7 @@ Official website of Luca Flammia, PhD — AI Solutions Architect. Expert in agen
 
 - **Framework:** [Astro](https://astro.build) (static site generation)
 - **Deployment:** Vercel Hobby Tier
-- **Domain:** lucaflammia.it
+- **Domain:** lucaflammia.com
 
 ## Structure
 
@@ -47,4 +47,4 @@ src/
 ## Pre-launch checklist
 
 - [ ] Replace `href="#booking"` in `src/pages/index.astro` and `src/pages/en/index.astro` with real Calendly/TidyCal URL
-- [ ] Connect repo to Vercel and set custom domain `lucaflammia.it`
+- [ ] Connect repo to Vercel and set custom domain `lucaflammia.com`

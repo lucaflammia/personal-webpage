@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
-  site: 'https://lucaflammia.it',
+  site: 'https://lucaflammia.com',
 
   vite: {
     plugins: [tailwindcss()],
