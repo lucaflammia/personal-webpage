@@ -297,15 +297,59 @@ import Layout from '../layouts/Layout.astro';
           <span class="text-[#f5f0eb]">Data Scientist @ Extendi.</span> Docente e speaker su AI Architecture nei ritagli di tempo.
         </p>
 
-        <a
-          href="mailto:luca.flammia@gmail.com"
-          class="inline-flex items-center gap-3 px-8 py-4 bg-[#c9a84c] text-[#0a0a0a] text-sm font-medium tracking-widest uppercase hover:bg-[#a07c30] transition-colors duration-200"
+        <!-- Contact form -->
+        <form
+          id="contact-form-it"
+          action="https://formspree.io/f/xeokvoqd"
+          method="POST"
+          class="space-y-4 mb-10"
         >
-          Scrivimi
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
+          <div>
+            <label for="name-it" class="block text-xs tracking-widest uppercase text-[#8a8480] mb-2">Nome</label>
+            <input
+              id="name-it"
+              type="text"
+              name="name"
+              required
+              placeholder="Il tuo nome"
+              class="w-full bg-[#0d0d0d] border border-[#222222] text-[#f5f0eb] text-sm px-4 py-3 placeholder-[#444444] focus:outline-none focus:border-[#c9a84c] transition-colors"
+            />
+          </div>
+          <div>
+            <label for="email-it" class="block text-xs tracking-widest uppercase text-[#8a8480] mb-2">Email</label>
+            <input
+              id="email-it"
+              type="email"
+              name="email"
+              required
+              placeholder="la.tua@email.com"
+              class="w-full bg-[#0d0d0d] border border-[#222222] text-[#f5f0eb] text-sm px-4 py-3 placeholder-[#444444] focus:outline-none focus:border-[#c9a84c] transition-colors"
+            />
+          </div>
+          <div>
+            <label for="message-it" class="block text-xs tracking-widest uppercase text-[#8a8480] mb-2">Messaggio</label>
+            <textarea
+              id="message-it"
+              name="message"
+              required
+              rows="5"
+              placeholder="Di cosa vorresti parlare?"
+              class="w-full bg-[#0d0d0d] border border-[#222222] text-[#f5f0eb] text-sm px-4 py-3 placeholder-[#444444] focus:outline-none focus:border-[#c9a84c] transition-colors resize-none"
+            ></textarea>
+          </div>
+          <div id="success-it" class="hidden p-4 border border-[#c9a84c]/30 bg-[#c9a84c]/5 text-sm text-[#c9a84c]">
+            Messaggio inviato. Ti risponderò entro 24–48 ore.
+          </div>
+          <button
+            type="submit"
+            class="inline-flex items-center gap-3 px-8 py-4 bg-[#c9a84c] text-[#0a0a0a] text-sm font-medium tracking-widest uppercase hover:bg-[#a07c30] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            Invia messaggio
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </form>
 
         <div class="mt-12 pt-12 border-t border-[#111111] grid grid-cols-1 sm:grid-cols-3 gap-8 text-sm">
           <div>
@@ -329,6 +373,25 @@ import Layout from '../layouts/Layout.astro';
       </div>
     </div>
   </section>
+
+  <script>
+    const formIt = document.getElementById('contact-form-it') as HTMLFormElement | null;
+    const successIt = document.getElementById('success-it');
+    formIt?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = formIt.querySelector('button[type="submit"]') as HTMLButtonElement;
+      btn.disabled = true;
+      const data = new FormData(formIt);
+      const res = await fetch(formIt.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+      if (res.ok) {
+        formIt.reset();
+        successIt?.classList.remove('hidden');
+      } else {
+        btn.disabled = false;
+        alert('Invio fallito. Riprova o scrivi direttamente a luca.flammia@gmail.com.');
+      }
+    });
+  </script>
 
   <!-- FOOTER -->
   <footer class="py-8 px-6 border-t border-[#111111]">
