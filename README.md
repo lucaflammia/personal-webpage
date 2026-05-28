@@ -1,6 +1,6 @@
 # lucaflammia.com — Personal Website
 
-Official website of Luca Flammia, PhD — AI Solutions Architect. Expert in agentic systems and data science for Enterprise and regulated industries. Strategic B2B consultancy for the Italian and international markets."
+Official website of Luca Flammia, PhD — Data Scientist @ Extendi, specializzato in AI Architecture e sistemi agentici. Docente e speaker su intelligenza artificiale applicata, Model Context Protocol e ingegnerizzazione di modelli in produzione.
 
 ## Stack
 
@@ -43,8 +43,3 @@ src/
 | `npm run dev` | Start dev server at `localhost:4321` |
 | `npm run build` | Build to `./dist/` |
 | `npm run preview` | Preview production build locally |
-
-## Pre-launch checklist
-
-- [ ] Replace `href="#booking"` in `src/pages/index.astro` and `src/pages/en/index.astro` with real Calendly/TidyCal URL
-- [ ] Connect repo to Vercel and set custom domain `lucaflammia.com`
