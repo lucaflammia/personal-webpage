@@ -264,14 +264,27 @@ import Layout from '../../layouts/Layout.astro';
       e.preventDefault();
       const btn = formEn.querySelector('button[type="submit"]') as HTMLButtonElement;
       btn.disabled = true;
-      const data = new FormData(formEn);
-      const res = await fetch(formEn.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
-      if (res.ok) {
-        formEn.reset();
-        successEn?.classList.remove('hidden');
-      } else {
+      const fd = new FormData(formEn);
+      const payload = { name: fd.get('name'), email: fd.get('email'), message: fd.get('message') };
+      try {
+        const res = await fetch('https://formspree.io/f/mdajbdan', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        if (res.ok) {
+          formEn.reset();
+          successEn?.classList.remove('hidden');
+        } else {
+          const body = await res.json().catch(() => ({}));
+          console.error('Formspree error', res.status, body);
+          btn.disabled = false;
+          alert('Submission failed. Please try again or email luca.flammia@gmail.com.');
+        }
+      } catch (err) {
+        console.error('Network error', err);
         btn.disabled = false;
-        alert('Submission failed. Please try again or email luca.flammia@gmail.com directly.');
+        alert('Network error. Please try again or email luca.flammia@gmail.com.');
       }
     });
   </script>
